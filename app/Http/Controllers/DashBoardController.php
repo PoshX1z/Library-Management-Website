@@ -4,28 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
-use App\Models\Member;
 use App\Models\Borrow;
+use App\Models\Purchase;
+use App\Models\Contact;
+use App\Models\Member;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // 1. Fetch Real Stats from Database
-        $stats = [
-            'total_books' => Book::count(),
-            'total_members' => Member::count(),
-            'borrowed' => Borrow::where('status', 'Borrowed')->count(),
-            'overdue' => Borrow::where('status', 'Overdue')->count(),
-        ];
+        $total_books = Book::count();
+        
+        $active_borrows = Borrow::whereIn('status', ['Borrowed', 'Overdue'])->count();
+        
+        $today_sales = Purchase::whereDate('purchased_at', Carbon::today())->sum('price');
+        
+        $unread_messages = Contact::where('is_read', false)->count();
 
-        // 2. Fetch Recent Transactions (Last 5 items)
-        // We use 'with' to eagerly load the Member and Book names to avoid 100 queries
-        $recent_transactions = Borrow::with(['member', 'book'])
+        $recent_transactions = Borrow::with(['book', 'member'])
                                      ->orderBy('borrow_date', 'desc')
                                      ->take(5)
                                      ->get();
 
-        return view('dashboard', compact('stats', 'recent_transactions'));
+        $total_members = Member::count();
+
+        return view('dashboard', compact(
+            'total_books', 
+            'active_borrows', 
+            'today_sales', 
+            'unread_messages', 
+            'recent_transactions',
+            'total_members'
+        ));
     }
 }

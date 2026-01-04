@@ -137,7 +137,7 @@
             <i class="fas fa-book-reader me-2"></i> LMS Admin
         </a>
         <div class="d-flex flex-column mt-3">
-            <a href="{{ url('/dashboard') }}" class="nav-link {{ request()->is('/dashboard') ? 'active' : '' }}">
+            <a href="{{ url('/') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
                 <i class="fas fa-chart-pie"></i> หน้าสรุปผล
             </a>
             <a href="{{ url('/books') }}" class="nav-link {{ request()->is('books*') ? 'active' : '' }}">
