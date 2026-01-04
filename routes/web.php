@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\PurchaseController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -17,10 +18,14 @@ Route::get('/transactions', [TransactionController::class, 'index'])->name('tran
 Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
 Route::put('/transactions/{id}', [TransactionController::class, 'update'])->name('transactions.update');
 
+Route::get('/purchases', [PurchaseController::class, 'index'])->name('purchases.index');
+Route::post('/purchases', [PurchaseController::class, 'store'])->name('purchases.store');
+
 Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedules.index');
 Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedules.store');
 Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
 Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
+
 
 
 Route::get('/', function () {

@@ -143,6 +143,9 @@
             <a href="{{ url('/books') }}" class="nav-link {{ request()->is('books*') ? 'active' : '' }}">
                 <i class="fas fa-book"></i> หนังสือทั้งหมด
             </a>
+            <a href="{{ url('/purchases') }}" class="nav-link {{ request()->is('purchases*') ? 'active' : '' }}">
+                <i class="fa-regular fa-money-bill-1"></i> ซื้อหนังสือ
+            </a>
             <a href="{{ url('/transactions') }}" class="nav-link {{ request()->is('transactions*') ? 'active' : '' }}">
                 <i class="fas fa-exchange-alt"></i> แก้ไข (ยืม-คืน)
             </a>

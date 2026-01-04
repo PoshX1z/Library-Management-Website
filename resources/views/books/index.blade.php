@@ -66,6 +66,7 @@
                     
                     <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center">
                         <span class="fw-bold text-primary">{{ number_format($book->price) }} ฿</span>
+                        <small>คงเหลือ {{ number_format($book->stock_quantity) }}</small>
                         
                         <div class="dropdown">
                             <button class="btn btn-sm btn-light rounded-circle" data-bs-toggle="dropdown">
@@ -142,6 +143,7 @@
                                             <label class="form-label">ราคา</label>
                                             <input type="number" name="price" class="form-control" value="{{ $book->price }}" required>
                                         </div>
+                                        
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">สถานะ</label>
                                             <select name="status" class="form-select">
