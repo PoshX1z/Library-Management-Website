@@ -7,17 +7,6 @@ USE libraryManagement;
 -- 2. Create Tables
 -- ==========================================
 
--- Table: Staffs (Admins)
-CREATE TABLE staffs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role ENUM('Super Admin', 'Librarian') DEFAULT 'Librarian',
-    phone VARCHAR(20),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 -- Table: Members (Students)
 CREATE TABLE members (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -110,6 +99,18 @@ CREATE TABLE notes (
     is_completed BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (staff_id) REFERENCES staffs(id)
+);
+
+-- Table: Staffs (Admins)
+CREATE TABLE staffs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('Super Admin', 'Librarian') DEFAULT 'Librarian',
+    remember_token VARCHAR(100) NULL;
+    phone VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE contacts (
