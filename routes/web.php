@@ -7,6 +7,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\StaffController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -32,6 +33,11 @@ Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
 Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update');
 Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy');
 
+
+Route::get('/staffs', [StaffController::class, 'index'])->name('staffs.index');
+Route::post('/staffs', [StaffController::class, 'store'])->name('staffs.store');
+Route::put('/staffs/{id}', [StaffController::class, 'update'])->name('staffs.update');
+Route::delete('/staffs/{id}', [StaffController::class, 'destroy'])->name('staffs.destroy');
 
 Route::get('/', function () {
     return view('welcome');

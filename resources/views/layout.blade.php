@@ -155,10 +155,10 @@
             <a href="{{ url('/notes') }}" class="nav-link {{ request()->is('notes*') ? 'active' : '' }}">
                 <i class="fas fa-sticky-note"></i> จดบันทึก
             </a>
-            <a href="{{ url('/staff') }}" class="nav-link {{ request()->is('staff*') ? 'active' : '' }}">
+            <a href="{{ url('/staffs') }}" class="nav-link {{ request()->is('staffs*') ? 'active' : '' }}">
                 <i class="fas fa-users-cog"></i> จัดการบุคลากร
             </a>
-            <a href="{{ url('/contact') }}" class="nav-link {{ request()->is('contact*') ? 'active' : '' }}">
+            <a href="{{ url('/contacts') }}" class="nav-link {{ request()->is('contacts*') ? 'active' : '' }}">
                 <i class="fas fa-headset"></i> ติดต่อเจ้าหน้าที่
             </a>
         </div>
