@@ -1,4 +1,4 @@
-# 📚 เว็บไซต์จัดการห้องสมุด (Library Management System Website)
+# 📚 เว็บไซต์จัดการห้องสมุด (Library Management System Website) & Responsive Design For All Devices
 
 > 🏆 **Vibe Code By AI** > *Rethinking Development with AI Assistance*
 
