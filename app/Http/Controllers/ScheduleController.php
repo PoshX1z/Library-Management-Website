@@ -34,7 +34,20 @@ class ScheduleController extends Controller
 
         return redirect()->back()->with('success', 'เพิ่มตารางกิจกรรมเรียบร้อยแล้ว');
     }
+    
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'event_date' => 'required|date',
+            'type' => 'required'
+        ]);
 
+        $schedule = Schedule::findOrFail($id);
+        $schedule->update($request->all());
+
+        return redirect()->back()->with('success', 'แก้ไขข้อมูลเรียบร้อยแล้ว');
+    }
     public function destroy($id)
     {
         Schedule::destroy($id);

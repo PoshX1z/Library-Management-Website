@@ -58,14 +58,76 @@
                                     {{ $event->end_time ? '- ' . substr($event->end_time, 0, 5) : '' }}
                                 </small>
                                 
-                                <form action="{{ route('schedules.destroy', $event->id) }}" method="POST" onsubmit="return confirm('ยืนยันการลบกิจกรรม?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm text-danger border-0 bg-transparent p-0">
-                                        <i class="fas fa-trash-alt"></i> ลบ
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-light text-primary" data-bs-toggle="modal" data-bs-target="#editEventModal{{ $event->id }}">
+                                        <i class="fas fa-edit"></i> แก้ไข
                                     </button>
-                                </form>
+
+                                    <form action="{{ route('schedules.destroy', $event->id) }}" method="POST" onsubmit="return confirm('ยืนยันการลบกิจกรรม?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-light text-danger">
+                                            <i class="fas fa-trash-alt"></i> ลบ
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editEventModal{{ $event->id }}" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content border-0 shadow">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title fw-bold">แก้ไขกิจกรรม</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('schedules.update', $event->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">หัวข้อกิจกรรม</label>
+                                    <input type="text" name="title" class="form-control" value="{{ $event->title }}" required>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">วันที่</label>
+                                        <input type="date" name="event_date" class="form-control" value="{{ $event->event_date }}" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">ประเภท</label>
+                                        <select name="type" class="form-select">
+                                            <option value="Event" {{ $event->type == 'Event' ? 'selected' : '' }}>Event (กิจกรรม)</option>
+                                            <option value="Holiday" {{ $event->type == 'Holiday' ? 'selected' : '' }}>Holiday (วันหยุด)</option>
+                                            <option value="Maintenance" {{ $event->type == 'Maintenance' ? 'selected' : '' }}>Maintenance (ปรับปรุง)</option>
+                                            <option value="Meeting" {{ $event->type == 'Meeting' ? 'selected' : '' }}>Meeting (ประชุม)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">เวลาเริ่ม</label>
+                                        <input type="time" name="start_time" class="form-control" value="{{ $event->start_time }}">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">เวลาสิ้นสุด</label>
+                                        <input type="time" name="end_time" class="form-control" value="{{ $event->end_time }}">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">รายละเอียด</label>
+                                    <textarea name="description" class="form-control" rows="3">{{ $event->description }}</textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-warning w-100 py-2">บันทึกการแก้ไข</button>
+                            </form>
                         </div>
                     </div>
                 </div>

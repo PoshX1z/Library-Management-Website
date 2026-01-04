@@ -19,6 +19,7 @@ Route::put('/transactions/{id}', [TransactionController::class, 'update'])->name
 
 Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedules.index');
 Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedules.store');
+Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
 Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
 
 
