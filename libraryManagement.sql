@@ -43,7 +43,7 @@ CREATE TABLE authors (
     bio TEXT
 );
 
--- Table: Books (FIXED: Added 'Borrowed' to ENUM)
+-- Table: Books
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
     isbn VARCHAR(20),
@@ -55,10 +55,20 @@ CREATE TABLE books (
     stock_quantity INT DEFAULT 1,
     image VARCHAR(255) DEFAULT 'book1.png',
     location VARCHAR(50),
-    status ENUM('Available', 'Borrowed', 'Maintenance', 'Lost') DEFAULT 'Available', -- Fixed line
+    status ENUM('Available', 'Borrowed', 'Maintenance', 'Lost', 'Sold Out') DEFAULT 'Available';
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE SET NULL,
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+);
+
+-- Purchases History Table
+CREATE TABLE purchases (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    book_id INT NOT NULL,
+    buyer_name VARCHAR(100) DEFAULT 'Guest',
+    price DECIMAL(10, 2) NOT NULL,
+    purchased_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (book_id) REFERENCES books(id)
 );
 
 -- Table: Borrows (Transactions)
@@ -101,6 +111,32 @@ CREATE TABLE notes (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (staff_id) REFERENCES staffs(id)
 );
+
+CREATE TABLE contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    subject VARCHAR(200) NOT NULL,
+    message TEXT NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Fix for "Table sessions doesn't exist"
+CREATE TABLE sessions (
+    id VARCHAR(255) PRIMARY KEY,
+    user_id INT NULL,
+    ip_address VARCHAR(45) NULL,
+    user_agent TEXT NULL,
+    payload LONGTEXT NOT NULL,
+    last_activity INT NOT NULL
+);
+CREATE TABLE cache (
+    `key` VARCHAR(255) PRIMARY KEY,
+    `value` MEDIUMTEXT NOT NULL,
+    `expiration` INT NOT NULL
+);
+
 
 -- ==========================================
 -- 3. Insert Mock Data
@@ -203,18 +239,7 @@ INSERT INTO notes (staff_id, title, content, priority, is_completed) VALUES
 (1, 'Check Fire Extinguisher', 'Check expiration date', 'Medium', FALSE),
 (2, 'Decorate for New Year', 'Put up lights', 'Low', TRUE);
 
-
--- Fix for "Table sessions doesn't exist"
-CREATE TABLE sessions (
-    id VARCHAR(255) PRIMARY KEY,
-    user_id INT NULL,
-    ip_address VARCHAR(45) NULL,
-    user_agent TEXT NULL,
-    payload LONGTEXT NOT NULL,
-    last_activity INT NOT NULL
-);
-CREATE TABLE cache (
-    `key` VARCHAR(255) PRIMARY KEY,
-    `value` MEDIUMTEXT NOT NULL,
-    `expiration` INT NOT NULL
-);
+INSERT INTO contacts (name, email, subject, message, is_read) VALUES
+('Student A', 'studentA@uni.ac.th', 'Request Harry Potter', 'Please buy more Harry Potter books.', 0),
+('Teacher B', 'teacherB@uni.ac.th', 'Projector Issue', 'The projector in Room 2 is broken.', 0),
+('Guest', 'guest@gmail.com', 'Opening Hours', 'Are you open on Sundays?', 1);

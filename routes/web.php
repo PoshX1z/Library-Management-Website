@@ -8,6 +8,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -38,6 +39,12 @@ Route::get('/staffs', [StaffController::class, 'index'])->name('staffs.index');
 Route::post('/staffs', [StaffController::class, 'store'])->name('staffs.store');
 Route::put('/staffs/{id}', [StaffController::class, 'update'])->name('staffs.update');
 Route::delete('/staffs/{id}', [StaffController::class, 'destroy'])->name('staffs.destroy');
+
+
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+Route::put('/contacts/{id}', [ContactController::class, 'update'])->name('contacts.update');
+Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
 Route::get('/', function () {
     return view('welcome');
