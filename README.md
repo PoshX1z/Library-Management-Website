@@ -1,59 +1,113 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 เว็บไซต์จัดการห้องสมุด (Library Management System Website)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> 🏆 **Vibe Code By AI** > *Rethinking Development with AI Assistance*
 
-## About Laravel
+ระบบบริหารจัดการห้องสมุดครบวงจรที่พัฒนาด้วย **Laravel Framework** (PHP) ออกแบบมาเพื่อความทันสมัย ใช้งานง่าย และครอบคลุมทุกฟังก์ชันที่จำเป็นสำหรับบรรณารักษ์และผู้ดูแลระบบ ตั้งแต่การยืม-คืนหนังสือ ไปจนถึงระบบขายหน้าร้าน (POS)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ ฟีเจอร์เด่น (Key Features)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+ระบบถูกแบ่งออกเป็นโมดูลต่างๆ เพื่อการทำงานที่ลื่นไหลและมีประสิทธิภาพ:
 
-## Learning Laravel
+### 1. 🔐 ระบบความปลอดภัยขั้นสูง (Advanced Security)
+* **Authentication:** ระบบเข้าสู่ระบบเฉพาะ **Super Admin** และเจ้าหน้าที่
+* **Secure Session:** รองรับการจดจำการเข้าสู่ระบบนาน 14 วัน (Remember Me)
+* **Password Hashing:** เข้ารหัสรหัสผ่านอัตโนมัติด้วย Bcrypt (ผ่าน Model Casting) เพื่อความปลอดภัยสูงสุด
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 2. 📖 จัดการหนังสือ (Book Management)
+* **CRUD Operations:** เพิ่ม, ลบ, แก้ไข, และดูรายละเอียดหนังสือ
+* **Smart Image Handling:** ระบบจัดการไฟล์รูปภาพปกหนังสืออัตโนมัติ (ลบรูปเก่าเมื่ออัปโหลดใหม่ เพื่อประหยัดพื้นที่)
+* **Status Tracking:** ติดตามสถานะหนังสือได้แบบ Real-time (ว่าง, ถูกยืม, ซ่อมบำรุง, หาย, ขายแล้ว)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. 🔄 ระบบยืม-คืน (Transactions)
+* **Borrowing:** บันทึกการยืมหนังสือ กำหนดวันส่งคืน (Due Date)
+* **Returning:** คำนวณ **ค่าปรับ (Fine)** อัตโนมัติเมื่อคืนหนังสือเกินกำหนด
+* **History:** ดูประวัติการยืม-คืนย้อนหลังได้ทั้งหมด
 
-## Laravel Sponsors
+### 4. 🛒 ระบบขายหนังสือ (POS & Purchases)
+* **Point of Sale:** หน้าจอขายหนังสือดีไซน์ E-Commerce ทันสมัย
+* **Stock Integration:** ตัดสต็อกอัตโนมัติเมื่อมีการขาย หากหมดจะขึ้นสถานะ "Sold Out"
+* **QR Code Payment:** จำลองระบบชำระเงินผ่าน QR Code พร้อม Animation การตรวจสอบยอดเงิน
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 5. 📅 ตารางกิจกรรม (Schedule & Events)
+* **Event Calendar:** จัดการวันหยุด วันประชุม และกิจกรรมของห้องสมุด
+* **Visual Badges:** แสดงวันที่ในรูปแบบปฏิทินที่สวยงามและเข้าใจง่าย
 
-### Premium Partners
+### 6. 📝 กระดานช่วยจำ (Sticky Notes)
+* **Kanban Style:** บันทึกงานที่ต้องทำ (To-Do) ในรูปแบบ Post-it
+* **Priority Levels:** แยกความสำคัญของงาน (High, Medium, Low) ด้วยสีสัน
+* **Completion Tracking:** ขีดฆ่ารายการที่ทำเสร็จแล้ว และย้ายไปยังประวัติ
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 7. 👥 จัดการบุคลากร (Staff Management)
+* **Role Based:** แบ่งระดับผู้ใช้งาน (Super Admin / Librarian)
+* **Secure Management:** เพิ่ม/ลบ เจ้าหน้าที่ และรีเซ็ตรหัสผ่านได้อย่างปลอดภัย
 
-## Contributing
+### 8. 📩 กล่องข้อความ (Contact Inbox)
+* **Message Center:** รับเรื่องร้องเรียน หรือคำขอหนังสือใหม่จากผู้ใช้
+* **Read/Unread Status:** ติดตามสถานะการเปิดอ่านข้อความ
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🛠️ เทคโนโลยีที่ใช้ (Tech Stack)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* **Backend:** PHP (Laravel 10/11)
+* **Frontend:** Bootstrap 5, FontAwesome, Custom CSS
+* **Database:** MySQL
+* **Server:** Apache (XAMPP/Laragon)
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🚀 การติดตั้งและใช้งาน (Installation)
 
-## License
+1.  **Clone Project**
+    ```bash
+    git clone [https://github.com/yourusername/library-management.git](https://github.com/yourusername/library-management.git)
+    cd library-management
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2.  **ติดตั้ง Dependencies**
+    ```bash
+    composer install
+    npm install && npm run build
+    ```
+
+3.  **ตั้งค่า Environment**
+    * เปลี่ยนชื่อไฟล์ `.env.example` เป็น `.env`
+    * ตั้งค่าการเชื่อมต่อฐานข้อมูล:
+        ```env
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=libraryManagement
+        DB_USERNAME=root
+        DB_PASSWORD=
+        ```
+
+4.  **สร้าง Key และตารางฐานข้อมูล**
+    ```bash
+    php artisan key:generate
+    php artisan migrate
+    ```
+    *(หมายเหตุ: โปรเจกต์นี้มีการใช้ SQL Script เฉพาะในการสร้างตารางบางส่วน กรุณาตรวจสอบไฟล์ Database)*
+
+5.  **รันเซิร์ฟเวอร์**
+    ```bash
+    php artisan serve
+    ```
+
+---
+
+## 🔑 บัญชีทดสอบ (Default Credentials)
+
+สำหรับเข้าใช้งานระบบครั้งแรก (Super Admin):
+
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Super Admin** | `admin@library.com` | `password123` |
+
+---
+
+## 👨‍💻 ผู้พัฒนา (Credits) นายปรัชญา ลีลานุวัฒน์
+
+> **Developed with ❤️ and 🤖 Intelligence** > *Vibe Code By AI*
