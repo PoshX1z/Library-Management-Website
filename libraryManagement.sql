@@ -244,3 +244,9 @@ INSERT INTO contacts (name, email, subject, message, is_read) VALUES
 ('Student A', 'studentA@uni.ac.th', 'Request Harry Potter', 'Please buy more Harry Potter books.', 0),
 ('Teacher B', 'teacherB@uni.ac.th', 'Projector Issue', 'The projector in Room 2 is broken.', 0),
 ('Guest', 'guest@gmail.com', 'Opening Hours', 'Are you open on Sundays?', 1);
+
+
+-- For login as admin
+UPDATE staffs 
+SET password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' 
+WHERE email = 'admin@library.com';

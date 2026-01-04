@@ -28,7 +28,7 @@ class StaffController extends Controller
         Staff::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
             'role' => $request->role,
             'phone' => $request->phone,
             'created_at' => Carbon::now()
@@ -48,18 +48,16 @@ class StaffController extends Controller
             'phone' => 'required'
         ]);
 
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-            'phone' => $request->phone
-        ];
+        $staff->name = $request->name;
+        $staff->email = $request->email;
+        $staff->role = $request->role;
+        $staff->phone = $request->phone;
 
         if ($request->filled('password')) {
-            $data['password'] = Hash::make($request->password);
+            $staff->password = $request->password;
         }
 
-        $staff->update($data);
+        $staff->save();
 
         return redirect()->back()->with('success', 'แก้ไขข้อมูลบุคลากรเรียบร้อยแล้ว');
     }

@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
     Route::put('/books/{id}', [BookController::class, 'update'])->name('books.update');
     Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
-    
+
     // Purchases (POS)
     Route::get('/purchases', [PurchaseController::class, 'index'])->name('purchases.index');
     Route::post('/purchases', [PurchaseController::class, 'store'])->name('purchases.store');
@@ -62,3 +62,4 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
 });
+
