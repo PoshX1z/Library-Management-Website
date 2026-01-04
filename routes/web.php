@@ -6,6 +6,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\NoteController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -26,6 +27,10 @@ Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedules.
 Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
 Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
 
+Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
+Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
+Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update');
+Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy');
 
 
 Route::get('/', function () {
