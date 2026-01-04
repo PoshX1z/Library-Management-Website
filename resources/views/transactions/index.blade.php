@@ -60,9 +60,9 @@
                                     @php
                                         $diff = \Carbon\Carbon::parse($t->due_date)->diff(\Carbon\Carbon::now());
                                     @endphp
-                                <small class="text-danger fw-bold" style="font-size: 0.75rem;">
-                                    เกินกำหนด {{ $diff->days }} วัน {{ $diff->h }} ชม. {{ $diff->i }} นาที
-                                </small>
+                                    <small class="text-danger fw-bold" style="font-size: 0.75rem;">
+                                        เกินกำหนด {{ $diff->days }} วัน {{ $diff->h }} ชม. {{ $diff->i }} นาที
+                                    </small>
                                 @endif
                             </td>
                             <td>
@@ -84,21 +84,74 @@
                                 @endif
                             </td>
                             <td class="text-end pe-4">
-                                @if($t->status == 'Borrowed' || $t->status == 'Overdue')
-                                    <form action="{{ route('transactions.update', $t->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-sm btn-outline-success shadow-sm" onclick="return confirm('ยืนยันการรับคืนหนังสือ? ค่าปรับจะถูกคำนวณอัตโนมัติ')">
-                                            <i class="fas fa-check-circle me-1"></i> รับคืน
-                                        </button>
-                                    </form>
-                                @else
-                                    <button class="btn btn-sm btn-light text-muted border-0" disabled>
-                                        <i class="fas fa-check me-1"></i> เรียบร้อย
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light rounded-circle shadow-sm" data-bs-toggle="dropdown">
+                                        <i class="fas fa-ellipsis-v text-muted"></i>
                                     </button>
-                                @endif
+                                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow">
+                                        @if($t->status == 'Borrowed' || $t->status == 'Overdue')
+                                            <li>
+                                                <form action="{{ route('transactions.update', $t->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="action" value="return">
+                                                    <button type="submit" class="dropdown-item text-success fw-bold" onclick="return confirm('ยืนยันการรับคืนหนังสือ?')">
+                                                        <i class="fas fa-check-circle me-2"></i> รับคืนหนังสือ
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTransactionModal{{ $t->id }}">
+                                                    <i class="fas fa-edit me-2 text-warning"></i> แก้ไขข้อมูล
+                                                </button>
+                                            </li>
+                                        @else
+                                            <li><span class="dropdown-item text-muted disabled">ไม่มีการดำเนินการ</span></li>
+                                        @endif
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
+
+                        <div class="modal fade" id="editTransactionModal{{ $t->id }}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content border-0 shadow">
+                                    <div class="modal-header border-0">
+                                        <h5 class="modal-title fw-bold">แก้ไขข้อมูลการยืม</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('transactions.update', $t->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="action" value="edit">
+
+                                            <div class="mb-3">
+                                                <label class="form-label text-secondary">ผู้ยืม - หนังสือ</label>
+                                                <input type="text" class="form-control bg-light" value="{{ $t->member->name }} - {{ $t->book->title }}" disabled>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">กำหนดส่งคืน (Due Date)</label>
+                                                <input type="date" name="due_date" class="form-control" value="{{ $t->due_date }}">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">ค่าปรับ (ปรับปรุงยอด)</label>
+                                                <input type="number" name="fine_amount" class="form-control" value="{{ $t->fine_amount }}">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">หมายเหตุ</label>
+                                                <textarea name="note" class="form-control" rows="2">{{ $t->note }}</textarea>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-warning w-100 text-dark">บันทึกการแก้ไข</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @endforeach
                     </tbody>
                 </table>

@@ -55,20 +55,33 @@ class TransactionController extends Controller
     public function update(Request $request, $id)
     {
         $borrow = Borrow::findOrFail($id);
-        
-        $fine = 0;
-        if (Carbon::now()->gt($borrow->due_date)) {
-            $days_over = Carbon::now()->diffInDays($borrow->due_date);
-            $fine = $days_over * 10; 
+
+        if ($request->has('action') && $request->action == 'return') {
+            $fine = 0;
+            if (Carbon::now()->gt($borrow->due_date)) {
+                $days_over = Carbon::now()->diffInDays($borrow->due_date);
+                $fine = $days_over * 10; 
+            }
+
+            $borrow->status = 'Returned';
+            $borrow->return_date = Carbon::now();
+            $borrow->fine_amount = $fine;
+            $borrow->save();
+
+            $borrow->book->update(['status' => 'Available']);
+
+            return redirect()->back()->with('success', 'รับคืนหนังสือเรียบร้อยแล้ว');
+        } else {
+            $request->validate([
+                'due_date' => 'required|date',
+            ]);
+
+            $borrow->due_date = $request->due_date;
+            $borrow->note = $request->note;
+            $borrow->fine_amount = $request->fine_amount ?? 0;
+            $borrow->save();
+
+            return redirect()->back()->with('success', 'แก้ไขข้อมูลการยืมเรียบร้อยแล้ว');
         }
-
-        $borrow->status = 'Returned';
-        $borrow->return_date = Carbon::now();
-        $borrow->fine_amount = $fine;
-        $borrow->save();
-
-        $borrow->book->update(['status' => 'Available']);
-
-        return redirect()->back()->with('success', 'รับคืนหนังสือเรียบร้อยแล้ว');
     }
 }
