@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22><path fill=%22%230d6efd%22 d=%22M464 64h-32v384H128a64 64 0 0 1-64-64V64H48a16 16 0 0 0-16 16v384a48 48 0 0 0 48 48h384a48 48 0 0 0 48-48V80a16 16 0 0 0-16-16zm-96 320H128a32 32 0 0 0 0 64h240z%22/></svg>">
     <style>
         :root {
             --sidebar-width: 280px;
